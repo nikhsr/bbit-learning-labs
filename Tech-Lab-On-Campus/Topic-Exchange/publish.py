@@ -25,6 +25,8 @@ def main(ticker: str, price: float, sector: str) -> None:
     #                       WRITE CODE HERE!!!
     #
 
+    routingKey =sector + ".*"
+
 
     producer = mqProducer(routing_key=routingKey,exchange_name="Tech Lab Topic Exchange")
 
@@ -34,14 +36,27 @@ def main(ticker: str, price: float, sector: str) -> None:
     #                       WRITE CODE HERE!!!
     #
     
-    
+    message = ticker + " is $" + str(price)
     producer.publishOrder(message)
 
 if __name__ == "__main__":
 
-    # Implement Logic to read the ticker, price and sector string from the command line and save them - Step 1
-    #
-    #                       WRITE CODE HERE!!!
-    #
+    # TODO: Implement Logic to read the ticker, price and sector string from the command line and save them to the variables ticker, price and sector
+    ticker = ""
+    price = 0.0
+    sector = ""
+    parser = argparse.ArgumentParser(description='Process some integers.')
+    parser.add_argument('ticker', type=str, help='Ticker')
+    parser.add_argument('price', type=float, help='Price')
+    parser.add_argument('sector', type=str, help='Sector')
+    args = parser.parse_args()
+    ticker = args.ticker
+    price = args.price
+    sector = args.sector
+    #Implement Logic to Create Routing Key from the ticker and sector variable
+    
+   
+
+
 
     sys.exit(main(ticker,price,sector))
